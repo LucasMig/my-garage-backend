@@ -1,0 +1,11 @@
+
+model Vehicle {
+  id         Int       @id @default(autoincrement())
+  make       String
+  model      String
+  year       Int
+  plate      String
+  ownerId    Int
+  owner      User      @relation(fields: [ownerId], references: [id])
+  maintenances Maintenance[]
+}

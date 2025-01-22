@@ -1,0 +1,8 @@
+model Maintenance {
+  id        Int      @id @default(autoincrement())
+  type      String
+  cost      Float
+  date      DateTime @default(now())
+  vehicleId Int
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id])
+}
