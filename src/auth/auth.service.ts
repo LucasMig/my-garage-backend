@@ -6,6 +6,7 @@ import {
   Injectable,
   UnauthorizedException,
 } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { scrypt as _scrypt, randomBytes } from 'crypto';
 import { promisify } from 'util';
 
@@ -13,7 +14,10 @@ const scrypt = promisify(_scrypt);
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async signUp(dto: SignUpDto) {
     const { name, email, password } = dto;
@@ -55,7 +59,19 @@ export class AuthService {
     if (storedHash !== hash.toString('hex')) {
       throw new UnauthorizedException('Invalid credentials');
     }
-    const { password: _, ...result } = existingUser;
-    return result;
+
+    const payload = {
+      sub: existingUser.id,
+      email: existingUser.email,
+    };
+
+    return {
+      access_token: this.jwtService.sign(payload),
+      user: {
+        id: existingUser.id,
+        name: existingUser.name,
+        email: existingUser.email,
+      },
+    };
   }
 }
