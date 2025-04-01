@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "CarModel" ALTER COLUMN "year" SET DATA TYPE TEXT;

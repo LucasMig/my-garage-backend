@@ -1,0 +1,9 @@
+model CarModel {
+    id         Int      @id @default(autoincrement())
+    make       String
+    model      String
+    year       String
+    vehicles   Vehicle[]
+
+    @@unique([make, model, year])
+}
