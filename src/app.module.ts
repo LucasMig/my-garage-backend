@@ -4,8 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { CarModelModule } from './car-model/car-model.module';
-import { PrismaService } from './database/prisma.service';
+import { PrismaModule } from './database/prisma.module';
 import { UsersModule } from './users/users.module';
+import { VehiclesModule } from './vehicles/vehicles.module';
 
 @Module({
   imports: [
@@ -15,8 +16,10 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AuthModule,
     CarModelModule,
+    VehiclesModule,
+    PrismaModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [AppService],
 })
 export class AppModule {}

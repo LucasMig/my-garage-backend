@@ -1,10 +1,14 @@
+import { CarModelService } from '@/car-model/car-model.service';
 import { PrismaService } from '@/database/prisma.service';
 import { carModelInclude, formatVehicle } from '@/vehicles/vehicles.utils';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class VehiclesService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private carModelService: CarModelService,
+  ) {}
 
   // CREATE
   // READ
