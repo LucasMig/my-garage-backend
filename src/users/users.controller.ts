@@ -25,8 +25,33 @@ export class UsersController {
     return await this.usersService.findById(+id);
   }
 
+  @Post(':id/vehicles')
+  async addVehicle(
+    @Param('id') id: string,
+    @Body('vehicleId') carModelId: string,
+    @Body('plate') plate: string,
+  ) {
+    return await this.vehiclesService.addToUser(+id, +carModelId, plate);
+  }
+
   @Get(':id/vehicles')
   async findUserVehicles(@Param('id') id: string) {
     return await this.vehiclesService.findByUserId(+id);
+  }
+
+  @Get(':id/vehicles/:vehicleId')
+  async findUserVehicle(
+    @Param('id') _id: string,
+    @Param('vehicleId') vehicleId: string,
+  ) {
+    return await this.vehiclesService.findByVehicleId(+vehicleId);
+  }
+
+  @Post(':id/vehicles/:vehicleId')
+  async removeVehicle(
+    @Param('id') id: string,
+    @Param('vehicleId') vehicleId: string,
+  ) {
+    return await this.vehiclesService.removeFromUser(+id, +vehicleId);
   }
 }

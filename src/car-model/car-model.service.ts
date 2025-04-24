@@ -29,4 +29,16 @@ export class CarModelService {
       }[],
     );
   }
+
+  async findById(id: number) {
+    const carModel = await this.prisma.carModel.findUnique({
+      where: { id },
+    });
+
+    if (!carModel) {
+      throw new Error('Car model not found');
+    }
+
+    return carModel;
+  }
 }
