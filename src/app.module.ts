@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { AuthModule } from './auth/auth.module';
+import { CarModelModule } from './car-model/car-model.module';
 import { PrismaService } from './database/prisma.service';
 import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
-import { VehiclesModule } from './vehicles/vehicles.module';
 
 @Module({
   imports: [
@@ -14,7 +14,7 @@ import { VehiclesModule } from './vehicles/vehicles.module';
     }),
     UsersModule,
     AuthModule,
-    VehiclesModule,
+    CarModelModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
